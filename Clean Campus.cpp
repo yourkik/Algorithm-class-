@@ -1,7 +1,6 @@
 //#define _CRT_SECURE_NO_WARNINGS
 ////화단을 모두 포함하도록 묶는 최소 천의 길이를 구하는 문제
-////최종 결과에 2를 더해야함
-////시작점은 (0, 0)
+////convex hull의 시작점을 시작점 0,0과 연결 즉 convex hull의 시작점과 0, 0의 거리 * 2를 더해줘야함
 //#include<stdio.h>
 //#include<stdlib.h>
 //#include<math.h>
@@ -33,7 +32,7 @@
 //double distance(Point p1, Point p2) {
 //	double dx = p1.x - p2.x;
 //	double dy = p1.y - p2.y;
-//	printf("%lf %lf / %lf %lf\n", p1.x, p1.y,p2.x,p2.y);
+//	//printf("%lf %lf / %lf %lf\n", p1.x, p1.y,p2.x,p2.y);
 //	return sqrt(dx * dx + dy * dy);
 //}
 //
