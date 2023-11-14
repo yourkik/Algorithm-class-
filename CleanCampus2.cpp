@@ -37,23 +37,26 @@ double JarvisMarch(struct Point P[], int n) {
 		}
 	}
 
-	// Swap the lowest point with the first point (0,0)
+	// Swap the lowest point with the first point
 	struct Point temp = P[0];
 	P[0] = P[minY];
 	P[minY] = temp;
 
-	// Initialize the convex hull with the lowest point
-	int hull[MAX_P];
+	//// Initialize the convex hull with the lowest point
+	//int hull[MAX_P];
+	//int hull_i = 0;
+	//int current = 0;
+	Point hull[100];
 	int hull_i = 0;
 	int current = 0;
 
 	do {
-		hull[hull_i] = current;
+		hull[hull_i] = P[current];
 		hull_i++;
 		int next = (current + 1) % n;
 		for (int i = 0; i < n; i++) {
 			if (i == current || i == next) continue;
-			if (CCW(P[current], P[next], P[i])) next = i;
+			if (!CCW(P[current], P[next], P[i])) next = i;
 		}
 		current = next;
 	} while (current != 0);
@@ -61,15 +64,16 @@ double JarvisMarch(struct Point P[], int n) {
 	// Calculate the length of silk required
 	double totalLength = 0.0;
 	for (int i = 0; i < hull_i; i++) {
-		int p1Index = hull[i];
+		/*int p1Index = hull[i];
 		int p2Index = hull[(i + 1) % hull_i];
-		totalLength += distance(P[p1Index], P[p2Index]);
+		totalLength += distance(P[p1Index], P[p2Index]);*/
+		totalLength += distance(hull[i], hull[(i + 1) % hull_i]);
 	}
 
 	Point startPoint = { 0,0 };
 	// Add extra meters for tying
 	if (P[minY].x != 0 || P[minY].y != 0) {
-		totalLength += 2 * distance(P[hull[0]], startPoint);
+		totalLength += 2 * distance(hull[0], startPoint);
 	}
 
 	return totalLength;
